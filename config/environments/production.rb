@@ -84,8 +84,8 @@ Rails.application.configure do
       :s3_region => 'ap-southeast-1',
       :s3_credentials => {
           :bucket => 'contacts-app',
-          :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
-          :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
+          :access_key_id => ENV.fetch('AWS_ACCESS_KEY_ID'),
+          :secret_access_key => ENV.fetch('AWS_SECRET_ACCESS_KEY'),
           :s3_region => 'ap-southeast-1'
       }
   }
