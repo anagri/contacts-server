@@ -9,7 +9,7 @@
       <th>Last name</th>
       <th>Email</th>
       <th>Phone number</th>
-      <th>Photo</th>
+      <th>Profile Pic</th>
       <th>Favorite</th>
       <th colspan="3"></th>
     </tr>
@@ -22,7 +22,7 @@
         <td><%= contact.last_name %></td>
         <td><%= contact.email %></td>
         <td><%= contact.phone_number %></td>
-        <td><%= contact.photo %></td>
+        <td><%= image_tag contact.profile_pic.url %></td>
         <td><%= contact.favorite %></td>
         <td><%= link_to 'Show', contact %></td>
         <td><%= link_to 'Edit', edit_contact_path(contact) %></td>

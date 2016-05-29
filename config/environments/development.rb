@@ -45,7 +45,8 @@ Rails.application.configure do
           :provider => "local",
           :local_root => "#{Rails.root}/public"
       },
-      :fog_host => 'localhost',
+      :fog_host => '',
+      :fog_port => '3000',
       :fog_directory => ''
   }
 end

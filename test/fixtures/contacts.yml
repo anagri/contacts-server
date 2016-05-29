@@ -5,7 +5,7 @@ one:
   last_name: MyString
   email: MyString
   phone_number: MyString
-  photo: MyString
+  profile_pic_url: /images/missing.png
   favorite: false
 
 two:
@@ -13,5 +13,5 @@ two:
   last_name: MyString
   email: MyString
   phone_number: MyString
-  photo: MyString
+  profile_pic_url: /images/missing.png
   favorite: false
