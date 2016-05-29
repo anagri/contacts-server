@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
 
   # GET /contacts
@@ -32,9 +33,17 @@ class ContactsController < ApplicationController
         format.json { render :show, status: :created, location: @contact }
       else
         format.html { render :new }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        format.json { render json: build_error(@contact.errors), status: :unprocessable_entity }
       end
     end
+  end
+
+  def build_error(errors)
+    result = []
+    errors.each do |k, v|
+      result << "#{k.to_s.gsub('_', ' ').capitalize} #{v}"
+    end
+    {errors: result}
   end
 
   # PATCH/PUT /contacts/1
@@ -46,7 +55,7 @@ class ContactsController < ApplicationController
         format.json { render :show, status: :ok, location: @contact }
       else
         format.html { render :edit }
-        format.json { render json: @contact.errors, status: :unprocessable_entity }
+        format.json { render json: build_error(@contact.errors), status: :unprocessable_entity }
       end
     end
   end
@@ -62,13 +71,13 @@ class ContactsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contact
+    @contact = Contact.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def contact_params
-      params.require(:contact).permit(:first_name, :last_name, :email, :phone_number, :profile_pic, :favorite)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def contact_params
+    params.require(:contact).permit(:first_name, :last_name, :email, :phone_number, :profile_pic, :favorite)
+  end
 end
