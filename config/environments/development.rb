@@ -38,4 +38,14 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.paperclip_defaults = {
+      :storage => :fog,
+      :fog_credentials => {
+          :provider => "local",
+          :local_root => "#{Rails.root}/public"
+      },
+      :fog_host => 'localhost',
+      :fog_directory => ''
+  }
 end
