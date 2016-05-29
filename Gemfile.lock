@@ -37,6 +37,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    apipie-rails (0.3.6)
+      json
     arel (6.0.3)
     aws-sdk (1.66.0)
       aws-sdk-v1 (= 1.66.0)
@@ -299,6 +301,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  apipie-rails
   aws-sdk (~> 1.6)
   byebug
   coffee-rails (~> 4.1.0)

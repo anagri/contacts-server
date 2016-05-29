@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  apipie
   get '/' => redirect('/contacts')
   resources :contacts
   # The priority is based upon order of creation: first created -> highest priority.

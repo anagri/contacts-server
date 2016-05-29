@@ -1,15 +1,71 @@
 class ContactsController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_contact, only: [:show, :edit, :update, :destroy]
+  resource_description do
+    api_base_url '/contacts'
+    formats ['html','json']
+    short_description 'RESTful API to manage contacts'
+    error 404, "Not Found"
+    error 422, "Validation Errors"
+    error 500, "Internal Server Error"
+  end
 
   # GET /contacts
   # GET /contacts.json
+  api :GET, '/index.html'
+  api :GET, '.json'
+  error 200, "OK"
+  description 'Get all the contacts in json/html format'
+  example <<EXAMPLE
+[
+  {
+  "id": 1,
+  "first_name": "Amitabh",
+  "last_name": "Bachchan",
+  "email": "ab@bachchan.com",
+  "phone_number": "+919980123412",
+  "profile_pic": "https://contacts-app.s3-ap-southeast-1.amazonaws.com/contacts/profile_pics/000/000/007/original/ab.jpg?1464516610",
+  "favorite": false,
+  "created_at": "2016-05-29T10:10:10.995Z",
+  "updated_at": "2016-05-29T10:10:10.995Z"
+  },
+  {
+  "id": 2,
+  "first_name": "Shahrukh",
+  "last_name": "Khan",
+  "email": "srk@kingkhan.com",
+  "phone_number": "+919980432143",
+  "profile_pic": "https://contacts-app.s3-ap-southeast-1.amazonaws.com/contacts/profile_pics/000/000/008/original/srk.jpg?1464516694",
+  "favorite": false,
+  "created_at": "2016-05-29T10:11:34.134Z",
+  "updated_at": "2016-05-29T10:11:34.134Z"
+  }
+]
+EXAMPLE
   def index
     @contacts = Contact.all
   end
 
   # GET /contacts/1
   # GET /contacts/1.json
+  api :GET, '/{id}'
+  api :GET, '/{id}.json'
+  error 200, "OK"
+  param :id, Fixnum, :desc => "Contact ID", :required => false
+  description 'Get contacts detail'
+  example <<EXAMPLE
+{
+  "id": 1,
+  "first_name": "Amitabh",
+  "last_name": "Bachchan",
+  "email": "ab@bachchan.com",
+  "phone_number": "+919980123412",
+  "profile_pic": "https://contacts-app.s3-ap-southeast-1.amazonaws.com/contacts/profile_pics/000/000/007/original/ab.jpg?1464516610",
+  "favorite": false,
+  "created_at": "2016-05-29T10:10:10.995Z",
+  "updated_at": "2016-05-29T10:10:10.995Z"
+}
+EXAMPLE
   def show
   end
 
@@ -24,6 +80,24 @@ class ContactsController < ApplicationController
 
   # POST /contacts
   # POST /contacts.json
+  api :POST, ''
+  api :POST, '.json'
+  description 'Create new contact'
+  error 201, 'Contact successfully created'
+  error 422, "Validation Errors"
+  example <<EXAMPLE
+{
+  "id": 1,
+  "first_name": "Amitabh",
+  "last_name": "Bachchan",
+  "email": "ab@bachchan.com",
+  "phone_number": "+919980123412",
+  "profile_pic": "https://contacts-app.s3-ap-southeast-1.amazonaws.com/contacts/profile_pics/000/000/007/original/ab.jpg?1464516610",
+  "favorite": false,
+  "created_at": "2016-05-29T10:10:10.995Z",
+  "updated_at": "2016-05-29T10:10:10.995Z"
+}
+EXAMPLE
   def create
     @contact = Contact.new(contact_params)
 
@@ -48,6 +122,24 @@ class ContactsController < ApplicationController
 
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
+  api :PUT, '/{id}'
+  api :PUT, '/{id}.json'
+  error 200, "OK"
+  param :id, Fixnum, :desc => "Contact ID", :required => false
+  description 'Update contacts detail'
+  example <<EXAMPLE
+{
+  "id": 1,
+  "first_name": "Amitabh",
+  "last_name": "Bachchan",
+  "email": "ab@bachchan.com",
+  "phone_number": "+919980123412",
+  "profile_pic": "https://contacts-app.s3-ap-southeast-1.amazonaws.com/contacts/profile_pics/000/000/007/original/ab.jpg?1464516610",
+  "favorite": false,
+  "created_at": "2016-05-29T10:10:10.995Z",
+  "updated_at": "2016-05-29T10:10:10.995Z"
+}
+EXAMPLE
   def update
     respond_to do |format|
       if @contact.update(contact_params)
