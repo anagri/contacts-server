@@ -141,11 +141,14 @@ EXAMPLE
 }
 EXAMPLE
   def update
+    puts("new update request")
+    puts(contact_params)
     respond_to do |format|
       if @contact.update(contact_params)
         format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
         format.json { render :show, status: :ok, location: @contact }
       else
+        puts(@contact.errors)
         format.html { render :edit }
         format.json { render json: build_error(@contact.errors), status: :unprocessable_entity }
       end
