@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <title>Go-Food Social</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+  </head>
+  <body>
+    <iframe id="innerFrame" style="display:none" height="0" width="0"></iframe>
+	<p id="msg">Redirecting you to GO-JEK App...</p>
+    <script>
+var store_link = "itms-apps://itunes.apple.com/us/app/id944875099?ls=1&mt=8";
+var play_link = "market://details?id=com.gojek.app&af_dp%3Dgojek%3A//gofood%2Finvite";
+var app_link = "gojek://gofood/invite?media_source=INVITE";
+
+var ifrm = document.getElementById("innerFrame");
+
+function redirect_to_store() {
+  if (!document.hidden) {
+    window.location.href = store_link;
+  }
+}
+
+try {
+  ifrm.src = app_link;
+} catch (e) {
+	try {
+	    ifrm.src = play_link;
+	} catch (e) {
+		window.location.href = app_link;
+	}
+} 
+setTimeout (redirect_to_store, 1000);
+    </script>
+  </body>
+</html>

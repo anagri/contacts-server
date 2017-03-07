@@ -129,7 +129,6 @@ EXAMPLE
   description 'Update contacts detail'
   example <<EXAMPLE
 {
-  "id": 1,
   "first_name": "Amitabh",
   "last_name": "Bachchan",
   "email": "ab@bachchan.com",
