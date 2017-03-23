@@ -15,35 +15,29 @@ class ContactsController < ApplicationController
   api :GET, '/index.html'
   api :GET, '.json'
   error 200, "OK"
-  description 'Get all the contacts in json/html format'
+  description 'Get all the contacts in json/html format. Contacts are sorted favorite first, and then rest of the contact alphabetically.'
   example <<EXAMPLE
 [
   {
   "id": 1,
   "first_name": "Amitabh",
   "last_name": "Bachchan",
-  "email": "ab@bachchan.com",
-  "phone_number": "+919980123412",
   "profile_pic": "https://contacts-app.s3-ap-southeast-1.amazonaws.com/contacts/profile_pics/000/000/007/original/ab.jpg?1464516610",
   "favorite": false,
-  "created_at": "2016-05-29T10:10:10.995Z",
-  "updated_at": "2016-05-29T10:10:10.995Z"
-  },
+  "url": "https://gojek-contacts-app.herokuapp.com/contacts/1.json"
+},
   {
   "id": 2,
   "first_name": "Shahrukh",
   "last_name": "Khan",
-  "email": "srk@kingkhan.com",
-  "phone_number": "+919980432143",
   "profile_pic": "https://contacts-app.s3-ap-southeast-1.amazonaws.com/contacts/profile_pics/000/000/008/original/srk.jpg?1464516694",
   "favorite": false,
-  "created_at": "2016-05-29T10:11:34.134Z",
-  "updated_at": "2016-05-29T10:11:34.134Z"
+  "url": "https://gojek-contacts-app.herokuapp.com/contacts/1.json"
   }
 ]
 EXAMPLE
   def index
-    @contacts = Contact.all
+    @contacts = Contact.order({:favorite => 'DESC', :first_name => 'ASC', :last_name => 'ASC'}).all
   end
 
   # GET /contacts/1
