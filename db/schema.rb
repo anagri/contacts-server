@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20160529062315) do
     t.string   "last_name"
     t.string   "email"
     t.string   "phone_number"
-    t.boolean  "favorite"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.boolean  "favorite",                 default: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.string   "profile_pic_file_name"
     t.string   "profile_pic_content_type"
     t.integer  "profile_pic_file_size"

@@ -5,7 +5,7 @@ class CreateContacts < ActiveRecord::Migration
       t.string :last_name
       t.string :email
       t.string :phone_number
-      t.boolean :favorite
+      t.boolean :favorite, default: false
 
       t.timestamps null: false
     end
